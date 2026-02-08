@@ -3,136 +3,113 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mustafa Tech | Premium Store</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
+    <title>Mustafa Crypto Tech | Next-Gen Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #020617; /* ڕەنگی ڕەشی شینباو */
-            --card: #1e293b; /* ڕەنگی کارتەکان */
-            --primary: #38bdf8; /* شینی گەش */
-            --text: #f1f5f9;
-            --accent: #818cf8;
+            --bg: #050505;
+            --card: #111111;
+            --btc: #f7931a;
+            --eth: #627eea;
+            --usdt: #26a17b;
+            --primary: #00ffcc;
+            --text: #ffffff;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Space Grotesk', sans-serif; }
         body { background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-        /* Navbar */
+        /* Crypto Ticker (نرخی دراوەکان) */
+        .ticker-wrap {
+            background: #111; padding: 10px 0; border-bottom: 1px solid #222;
+            overflow: hidden; white-space: nowrap; font-size: 0.8rem; font-weight: bold;
+        }
+        .ticker { display: inline-block; animation: scroll 20s linear infinite; }
+        .ticker span { margin-right: 50px; }
+        .btc-c { color: var(--btc); } .eth-c { color: var(--eth); } .usdt-c { color: var(--usdt); }
+        @keyframes scroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
+
         nav {
-            background: rgba(2, 6, 23, 0.8);
-            backdrop-filter: blur(15px);
-            padding: 20px 8%;
-            display: flex; justify-content: space-between; align-items: center;
-            position: sticky; top: 0; z-index: 100;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding: 25px 8%; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(5,5,5,0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
         }
-        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); letter-spacing: -1px; }
-        .nav-links a { color: var(--text); text-decoration: none; margin-left: 25px; font-size: 0.9rem; opacity: 0.8; transition: 0.3s; }
-        .nav-links a:hover { opacity: 1; color: var(--primary); }
+        .logo { font-size: 1.6rem; font-weight: 700; color: var(--primary); text-shadow: 0 0 10px var(--primary); }
 
-        /* Hero Section */
         .hero {
-            padding: 100px 8%;
-            display: flex; align-items: center; justify-content: space-between;
-            min-height: 80vh;
+            padding: 100px 8%; display: flex; align-items: center; justify-content: space-between;
+            background: radial-gradient(circle at top right, #00ffcc15, transparent);
         }
-        .hero-content { max-width: 600px; }
-        .hero-content h1 { font-size: 4rem; font-weight: 800; line-height: 1.1; margin-bottom: 25px; }
-        .hero-content span { 
-            background: linear-gradient(90deg, var(--primary), var(--accent));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .btn-main {
-            background: var(--primary); color: #000; padding: 15px 40px;
-            border-radius: 12px; text-decoration: none; font-weight: 800;
-            display: inline-block; transition: 0.3s;
-            box-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
-        }
-        .btn-main:hover { transform: scale(1.05); box-shadow: 0 0 30px rgba(56, 189, 248, 0.5); }
+        .hero-content h1 { font-size: 4.5rem; line-height: 1; margin-bottom: 20px; }
+        .hero-content span { color: var(--primary); }
+        .crypto-icons { display: flex; gap: 15px; margin-top: 20px; font-size: 1.2rem; opacity: 0.7; }
 
-        /* Product Grid */
-        .products { padding: 80px 8%; }
-        .section-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 40px; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        
+        .btn-crypto {
+            background: var(--primary); color: #000; padding: 18px 40px;
+            border-radius: 5px; text-decoration: none; font-weight: 800;
+            display: inline-block; margin-top: 30px; transition: 0.3s;
+            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%); /* Cyberpunk style */
+        }
+        .btn-crypto:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--primary); }
+
+        .grid { padding: 80px 8%; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .p-card {
-            background: var(--card);
-            padding: 30px;
-            border-radius: 24px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            text-align: center;
+            background: var(--card); padding: 30px; border-radius: 15px;
+            border: 1px solid #222; transition: 0.4s; text-align: center;
         }
-        .p-card:hover { 
-            transform: translateY(-12px); 
-            border-color: var(--primary);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
-        }
-        .p-card img { width: 100%; height: 220px; object-fit: contain; margin-bottom: 20px; }
-        .p-card h3 { font-size: 1.2rem; margin-bottom: 10px; }
-        .price { font-weight: 800; color: var(--primary); font-size: 1.4rem; }
-
-        /* Decoration Blobs */
-        .blob {
-            position: absolute; width: 300px; height: 300px;
-            background: var(--primary); filter: blur(120px);
-            border-radius: 50%; z-index: -1; opacity: 0.1;
-            top: 10%; right: 10%;
-        }
+        .p-card:hover { border-color: var(--primary); transform: translateY(-10px); }
+        .p-card img { width: 100%; height: 200px; object-fit: contain; margin-bottom: 20px; }
+        
+        .crypto-price { display: flex; justify-content: center; gap: 10px; margin-top: 15px; font-size: 0.9rem; }
+        .tag { padding: 4px 10px; border-radius: 4px; background: #222; font-weight: bold; }
     </style>
 </head>
 <body>
-    <div class="blob"></div>
-    
-    <nav>
-        <div class="logo">MUSTAFA.PRO</div>
-        <div class="nav-links">
-            <a href="#">Phones</a>
-            <a href="#">Laptops</a>
-            <a href="#">Accessories</a>
-            <a href="#" style="background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 8px;">Cart (0)</a>
+
+    <div class="ticker-wrap">
+        <div class="ticker">
+            <span class="btc-c">BTC: $64,231.50 ▲</span>
+            <span class="eth-c">ETH: $3,452.12 ▲</span>
+            <span class="usdt-c">USDT: $1.00 ▬</span>
+            <span class="btc-c">SOL: $145.20 ▼</span>
         </div>
+    </div>
+
+    <nav>
+        <div class="logo">MUSTAFA.WEB3</div>
+        <div style="font-weight: 500;">Connect Wallet</div>
     </nav>
 
     <section class="hero">
         <div class="hero-content">
-            <h1>Upgrade to <br><span>Next-Gen</span> Tech.</h1>
-            <p style="color: #94a3b8; font-size: 1.1rem; margin-bottom: 40px;">Experience the best collection of premium gadgets in Iraq with official warranty.</p>
-            <a href="#shop" class="btn-main">Shop Collection</a>
+            <h1>Future Tech<br><span>Crypto Pay.</span></h1>
+            <p style="color: #888; margin-top: 20px;">Buy the latest hardware using BTC, ETH, or USDT. Fast, secure, and decentralized.</p>
+            <div class="crypto-icons">₿ | Ξ | ₮</div>
+            <a href="#shop" class="btn-crypto">START SHOPPING</a>
         </div>
-        <img src="https://www.apple.com/v/iphone-15-pro/c/images/overview/welcome/hero_endframe__ov6ewwmbhi6e_large.jpg" style="width: 45%; filter: drop-shadow(0 0 50px rgba(56, 189, 248, 0.2));" alt="Hero Image">
+        <img src="https://www.apple.com/v/iphone-15-pro/c/images/overview/welcome/hero_endframe__ov6ewwmbhi6e_large.jpg" style="width: 40%; filter: hue-rotate(150deg);" alt="Crypto Phone">
     </section>
 
-    <section class="products" id="shop">
-        <div class="section-header">
-            <h2>Featured Products</h2>
-            <a href="#" style="color: var(--primary); text-decoration: none;">View All →</a>
+    <section class="grid" id="shop">
+        <div class="p-card">
+            <img src="https://m.media-amazon.com/images/I/61S9aVnRZDL._AC_SL1500_.jpg" alt="PS5">
+            <h3>PlayStation 5 Slim</h3>
+            <div class="crypto-price">
+                <span class="tag btc-c">0.0075 BTC</span>
+                <span class="tag usdt-c">480 USDT</span>
+            </div>
+            <button onclick="alert('Redirecting to Crypto Wallet...')" style="margin-top:20px; width:100%; padding:10px; background:none; border:1px solid var(--primary); color:var(--primary); cursor:pointer;">Pay with Crypto</button>
         </div>
-        <div class="grid">
-            <div class="p-card">
-                <img src="https://m.media-amazon.com/images/I/61S9aVnRZDL._AC_SL1500_.jpg" alt="PS5">
-                <h3>PlayStation 5 Slim</h3>
-                <p class="price">$485.00</p>
-                <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.5;">Available in Stock</p>
+
+        <div class="p-card">
+            <img src="https://m.media-amazon.com/images/I/71YfM6T1LBL._AC_SL1500_.jpg" alt="MacBook">
+            <h3>MacBook Pro M3</h3>
+            <div class="crypto-price">
+                <span class="tag eth-c">0.42 ETH</span>
+                <span class="tag usdt-c">1450 USDT</span>
             </div>
-            <div class="p-card">
-                <img src="https://m.media-amazon.com/images/I/71YfM6T1LBL._AC_SL1500_.jpg" alt="MacBook">
-                <h3>MacBook Pro M3</h3>
-                <p class="price">$1,450.00</p>
-                <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.5;">Limited Edition</p>
-            </div>
-            <div class="p-card">
-                <img src="https://m.media-amazon.com/images/I/61o689X1kTL._AC_SL1500_.jpg" alt="AirPods">
-                <h3>AirPods Pro 2</h3>
-                <p class="price">$239.00</p>
-                <p style="font-size: 0.8rem; margin-top: 10px; opacity: 0.5;">Free Shipping</p>
-            </div>
+            <button onclick="alert('Redirecting to Crypto Wallet...')" style="margin-top:20px; width:100%; padding:10px; background:none; border:1px solid var(--primary); color:var(--primary); cursor:pointer;">Pay with Crypto</button>
         </div>
     </section>
 
-    <footer style="padding: 50px; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); opacity: 0.5; font-size: 0.8rem;">
-        © 2026 MUSTAFA TECH STORE • AUTHORIZED RESELLER
-    </footer>
 </body>
 </html>
