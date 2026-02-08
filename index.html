@@ -3,138 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mustafa Crypto Tech | Dynamic Sections</title>
+    <title>Mustafa Pro | Premium Web3 Store</title>
     <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg: #050505;
-            --card: #111111;
+            --bg: #020617;
+            --card: #0f172a;
             --primary: #00ffcc;
-            --text: #ffffff;
+            --accent: #38bdf8;
+            --text: #f8fafc;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Space Grotesk', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
         body { background: var(--bg); color: var(--text); overflow-x: hidden; }
 
         /* Navbar */
         nav {
             padding: 20px 8%; display: flex; justify-content: space-between; align-items: center;
-            background: rgba(5,5,5,0.9); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
-            border-bottom: 1px solid #222;
+            background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .logo { font-size: 1.6rem; font-weight: 700; color: var(--primary); }
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); letter-spacing: -1px; }
 
-        /* Tab Buttons Styling */
-        .tabs-container { text-align: center; margin: 40px 0; }
+        /* Hero Section - پڕۆفیشناڵ */
+        .hero {
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 100px 8%; min-height: 90vh;
+            background: radial-gradient(circle at 80% 20%, rgba(0, 255, 204, 0.05), transparent 50%);
+        }
+        .hero-content { max-width: 600px; }
+        .badge { 
+            background: rgba(0, 255, 204, 0.1); color: var(--primary); 
+            padding: 6px 15px; border-radius: 50px; font-size: 0.8rem; font-weight: bold;
+            border: 1px solid rgba(0, 255, 204, 0.2);
+        }
+        .hero-content h1 { font-size: 4.5rem; line-height: 1.1; margin: 25px 0; font-weight: 800; }
+        .hero-content span { background: linear-gradient(90deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        .hero-visual { position: relative; width: 45%; display: flex; justify-content: center; }
+        .floating-img { 
+            width: 100%; max-width: 400px; 
+            filter: drop-shadow(0 20px 50px rgba(0,0,0,0.6));
+            animation: float 5s ease-in-out infinite;
+        }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+
+        /* Tabs & Store */
+        .tabs-container { text-align: center; margin: 60px 0; }
         .tab-btn {
-            background: none; border: 1px solid var(--primary); color: var(--primary);
-            padding: 12px 30px; cursor: pointer; border-radius: 8px; margin: 5px;
-            font-weight: bold; transition: 0.3s;
+            background: none; border: 1px solid rgba(255,255,255,0.1); color: #94a3b8;
+            padding: 12px 35px; cursor: pointer; border-radius: 12px; margin: 5px;
+            font-weight: 600; transition: 0.4s;
         }
-        .tab-btn.active { background: var(--primary); color: #000; box-shadow: 0 0 15px var(--primary); }
+        .tab-btn.active { background: var(--primary); color: #020617; border-color: var(--primary); box-shadow: 0 0 20px rgba(0,255,204,0.3); }
 
-        /* Sections Visibility */
-        .tab-content { display: none; padding: 0 8% 80px 8%; }
-        .active-content { display: block; animation: fadeIn 0.6s ease; }
+        .tab-content { display: none; padding: 0 8% 100px 8%; }
+        .active-content { display: block; animation: fadeInUp 0.8s ease; }
 
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
         .p-card {
-            background: var(--card); padding: 30px; border-radius: 20px;
-            border: 1px solid #222; text-align: center; transition: 0.3s;
+            background: var(--card); padding: 40px; border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.03); text-align: center; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .p-card:hover { border-color: var(--primary); transform: translateY(-5px); }
-        .p-card img { width: 100%; height: 200px; object-fit: contain; margin-bottom: 20px; }
+        .p-card:hover { transform: translateY(-15px); border-color: var(--primary); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
+        .p-card img { width: 100%; height: 250px; object-fit: contain; margin-bottom: 25px; transition: 0.5s; }
+        .p-card:hover img { transform: scale(1.1); }
+        
+        .price-tag { font-size: 1.5rem; font-weight: 800; color: var(--primary); margin: 15px 0; }
+        .btn-buy { 
+            width: 100%; padding: 12px; background: none; border: 1px solid var(--primary); 
+            color: var(--primary); font-weight: bold; border-radius: 10px; cursor: pointer; transition: 0.3s;
+        }
+        .btn-buy:hover { background: var(--primary); color: #000; }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
 
-        .btn-connect { background: var(--primary); color: #000; padding: 10px 20px; border-radius: 8px; border: none; font-weight: 800; cursor: pointer; }
+        .btn-connect { background: var(--primary); color: #020617; padding: 10px 20px; border-radius: 10px; border: none; font-weight: 800; cursor: pointer; transition: 0.3s; }
+        .btn-connect:hover { transform: scale(1.05); }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">MUSTAFA.WEB3</div>
+        <div class="logo">MUSTAFA.PRO</div>
         <button id="wallet-btn" class="btn-connect" onclick="connectWallet()">Connect Wallet</button>
     </nav>
 
-    <div class="tabs-container">
+    <section class="hero">
+        <div class="hero-content">
+            <span class="badge">Next-Gen Technology</span>
+            <h1>iPhone 15 Pro<br><span>Titanium Power.</span></h1>
+            <p>Forged in titanium and featuring the groundbreaking A17 Pro chip. Buy now with BTC, ETH, or USDT.</p>
+            <div style="display: flex; gap: 15px;">
+                <button onclick="document.getElementById('shop').scrollIntoView()" class="btn-connect" style="padding: 15px 35px;">Shop Now</button>
+            </div>
+        </div>
+        <div class="hero-visual">
+            <img src="iphone.png" class="floating-img" alt="iPhone 15 Pro Hero">
+        </div>
+    </section>
+
+    <div class="tabs-container" id="shop">
         <button class="tab-btn active" onclick="openSection(event, 'phones')">iPhones</button>
         <button class="tab-btn" onclick="openSection(event, 'laptops')">MacBooks</button>
-        <button class="tab-btn" onclick="openSection(event, 'accessories')">Accessories</button>
     </div>
 
     <div id="phones" class="tab-content active-content">
-        <h2 style="margin-bottom: 30px; color: var(--primary);">Premium iPhones</h2>
         <div class="grid">
             <div class="p-card">
-                <img src="https://m.media-amazon.com/images/I/71657Z6-tWL._AC_SL1500_.jpg" alt="iPhone 15">
+                <img src="iphone.png" alt="iPhone 15 Pro">
                 <h3>iPhone 15 Pro Max</h3>
-                <p style="color: var(--primary); font-weight: bold;">1,199 USDT</p>
+                <p class="price-tag">1,199 USDT</p>
+                <button class="btn-buy">Pay with Crypto</button>
             </div>
-            <div class="p-card">
-                <img src="https://m.media-amazon.com/images/I/81Sig8rN1ML._AC_SL1500_.jpg" alt="iPhone 14">
-                <h3>iPhone 14 Pro</h3>
-                <p style="color: var(--primary); font-weight: bold;">999 USDT</p>
             </div>
-        </div>
     </div>
 
     <div id="laptops" class="tab-content">
-        <h2 style="margin-bottom: 30px; color: var(--primary);">Apple MacBooks</h2>
         <div class="grid">
             <div class="p-card">
                 <img src="https://m.media-amazon.com/images/I/71YfM6T1LBL._AC_SL1500_.jpg" alt="MacBook">
                 <h3>MacBook Pro M3</h3>
-                <p style="color: var(--primary); font-weight: bold;">1,599 USDT</p>
-            </div>
-        </div>
-    </div>
-
-    <div id="accessories" class="tab-content">
-        <h2 style="margin-bottom: 30px; color: var(--primary);">Crypto Hardware</h2>
-        <div class="grid">
-            <div class="p-card">
-                <img src="https://m.media-amazon.com/images/I/61NfI-f+f+L._AC_SL1000_.jpg" alt="Ledger">
-                <h3>Ledger Nano X</h3>
-                <p style="color: var(--primary); font-weight: bold;">149 USDT</p>
+                <p class="price-tag">1,599 USDT</p>
+                <button class="btn-buy">Pay with Crypto</button>
             </div>
         </div>
     </div>
 
     <script>
-        // مێشکی گۆڕینی بەشەکان
         function openSection(evt, sectionName) {
             var i, tabcontent, tablinks;
-
-            // هەموو ناوەڕۆکەکان دەشارێتەوە
             tabcontent = document.getElementsByClassName("tab-content");
             for (i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].style.display = "none";
                 tabcontent[i].classList.remove("active-content");
             }
-
-            // ڕەنگی دوگمە چالاکەکە لادەبات
             tablinks = document.getElementsByClassName("tab-btn");
             for (i = 0; i < tablinks.length; i++) {
                 tablinks[i].className = tablinks[i].className.replace(" active", "");
             }
-
-            // ئەو بەشەی کلیکی لێکراوە نیشان دەدات
             document.getElementById(sectionName).style.display = "block";
             document.getElementById(sectionName).classList.add("active-content");
             evt.currentTarget.className += " active";
         }
 
-        // کۆدی وۆڵێت (هەمان کۆدی پێشوو)
         async function connectWallet() {
             if (window.ethereum) {
                 const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
                 document.getElementById('wallet-btn').innerText = accounts[0].substring(0,6) + "...";
-                alert("Connected to Trust Wallet!");
+                document.getElementById('wallet-btn').style.background = "#22c55e";
             } else {
-                alert("Please use Trust Wallet Browser");
+                alert("Please open in Trust Wallet");
             }
         }
     </script>
