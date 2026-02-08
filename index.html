@@ -3,213 +3,92 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NOVA AI | Future of Technology</title>
-    
-    <meta name="description" content="NOVA AI delivers next-gen artificial intelligence solutions and quantum cloud services.">
-    <meta property="og:title" content="NOVA AI | Intelligence Redefined">
-    <meta property="og:description" content="Explore advanced AI engines and quantum cloud solutions.">
-    <meta property="og:type" content="website">
-
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
-    
+    <title>Mustafa Tech Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #6366f1;
-            --dark: #0f172a;
-            --light: #f8fafc;
-            --accent: #10b981;
-            --card-bg: #1e293b;
+            --bg: #f8fafc;
+            --main: #ffffff;
+            --primary: #2563eb;
+            --text: #1e293b;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg); color: var(--text); }
 
-        body { background-color: var(--dark); color: var(--light); overflow-x: hidden; line-height: 1.6; }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: var(--dark); }
-        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 5px; }
-
-        /* Navigation */
+        /* Navbar */
         nav {
+            background: var(--main); padding: 15px 8%;
             display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 10%; position: fixed; width: 100%; top: 0; z-index: 1000;
-            background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: sticky; top: 0; z-index: 100;
         }
-        .logo { font-weight: 800; font-size: 1.6rem; color: var(--primary); letter-spacing: 1px; }
-        .nav-links { display: flex; gap: 30px; list-style: none; }
-        .nav-links a { color: var(--light); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: 0.3s; }
-        .nav-links a:hover { color: var(--primary); }
+        .logo { font-weight: 800; font-size: 1.4rem; color: var(--primary); }
+        .search { background: #f1f5f9; border-radius: 10px; padding: 8px 15px; width: 40%; border: none; }
 
-        /* Hero Section */
+        /* Hero */
         .hero {
-            height: 100vh; display: flex; flex-direction: column;
-            justify-content: center; align-items: center; text-align: center;
-            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
-            padding: 0 20px;
+            padding: 80px 8%; display: flex; align-items: center; justify-content: space-between;
         }
-        .hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 800; margin-bottom: 20px; line-height: 1.1; letter-spacing: -2px; }
-        .hero p { font-size: 1.2rem; color: #94a3b8; max-width: 700px; margin-bottom: 40px; }
-        .btn-main {
-            background: var(--primary); color: white; padding: 18px 45px;
-            border-radius: 50px; text-decoration: none; font-weight: 700;
-            transition: 0.4s; box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
+        .hero-content h1 { font-size: 3.5rem; margin-bottom: 20px; line-height: 1.2; }
+        .hero-content span { color: var(--primary); }
+        .btn-buy {
+            background: var(--primary); color: white; padding: 12px 30px;
+            border-radius: 12px; text-decoration: none; font-weight: bold; display: inline-block;
         }
-        .btn-main:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(99, 102, 241, 0.6); }
 
-        /* Features Section */
-        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 60px; font-weight: 800; }
-        .features { padding: 100px 10%; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        
-        .f-card {
-            background: var(--card-bg); padding: 45px; border-radius: 24px;
-            border: 1px solid rgba(255,255,255,0.05); transition: 0.4s ease;
-            position: relative; overflow: hidden;
+        /* Product Grid */
+        .products { padding: 50px 8%; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
+        .p-card {
+            background: var(--main); padding: 20px; border-radius: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.03); transition: 0.3s;
+            text-align: center; border: 1px solid #f1f5f9;
         }
-        .f-card:hover { transform: translateY(-10px); background: #26334d; border-color: var(--primary); }
-        
-        .icon-box {
-            width: 60px; height: 60px; margin-bottom: 25px;
-            background: rgba(99, 102, 241, 0.1); border-radius: 15px;
-            display: flex; align-items: center; justify-content: center;
-        }
-        .icon-box img { width: 35px; height: 35px; filter: drop-shadow(0 0 5px var(--primary)); }
-        .f-card h3 { font-size: 1.4rem; margin-bottom: 15px; color: var(--light); }
-        .f-card p { font-size: 0.95rem; color: #94a3b8; }
+        .p-card:hover { transform: translateY(-10px); box-shadow: 0 20px 40px rgba(0,0,0,0.08); }
+        .p-card img { width: 100%; height: 200px; object-fit: contain; margin-bottom: 15px; }
+        .p-card h3 { margin-bottom: 10px; font-size: 1.1rem; }
+        .price { font-weight: 800; color: var(--primary); font-size: 1.2rem; }
 
-        /* Pricing Section */
-        .pricing { padding: 100px 10%; background: #0b1120; }
-        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        
-        .price-card {
-            background: var(--card-bg); padding: 45px; border-radius: 28px;
-            text-align: center; border: 1px solid rgba(255,255,255,0.05);
-            transition: 0.4s; position: relative;
-        }
-        .price-card.pro { border: 2px solid var(--primary); transform: scale(1.05); z-index: 10; }
-        .badge {
-            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
-            background: var(--primary); color: #000; padding: 6px 18px;
-            border-radius: 20px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase;
-        }
-        .amount { font-size: 3.5rem; font-weight: 800; margin: 25px 0; color: var(--primary); }
-        .amount span { font-size: 1rem; color: #94a3b8; }
-        .price-card ul { list-style: none; margin-bottom: 35px; text-align: left; }
-        .price-card ul li { margin-bottom: 15px; font-size: 0.9rem; color: #cbd5e1; display: flex; align-items: center; }
-        .price-card ul li::before { content: "✓"; color: var(--accent); margin-right: 12px; font-weight: bold; }
-        
-        .btn-price {
-            display: block; padding: 15px; border: 1.5px solid var(--primary);
-            color: var(--primary); text-decoration: none; border-radius: 15px;
-            font-weight: 700; transition: 0.3s;
-        }
-        .price-card.pro .btn-price { background: var(--primary); color: #000; }
-        .btn-price:hover { background: var(--primary); color: #000; box-shadow: 0 0 25px rgba(99, 102, 241, 0.4); }
-
-        /* Footer */
-        footer { padding: 60px 10%; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
-        .footer-text { font-size: 0.8rem; color: #64748b; letter-spacing: 2px; }
-
-        /* Reveal Animations */
-        .reveal { opacity: 0; transform: translateY(40px); transition: 1.2s cubic-bezier(0.17, 0.67, 0.83, 0.67) all; }
-        .reveal.active { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">NOVA.AI</div>
-        <ul class="nav-links">
-            <li><a href="#home">Home</a></li>
-            <li><a href="#features">Features</a></li>
-            <li><a href="#pricing">Pricing</a></li>
-        </ul>
+        <div class="logo">MUSTAFA.TECH</div>
+        <input type="text" class="search" placeholder="Search for products...">
+        <div style="font-weight: bold;">Cart (0)</div>
     </nav>
 
-    <section class="hero" id="home">
-        <h1 class="reveal">Intelligence <br><span style="color: var(--primary);">Redefined.</span></h1>
-        <p class="reveal">Empowering the world's most innovative companies with quantum-grade artificial intelligence and cloud-native neural engines.</p>
-        <a href="#features" class="btn-main reveal">Get Started Now</a>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>The Future of <br><span>Technology</span> is Here.</h1>
+            <p style="margin-bottom: 30px; color: #64748b;">Get the latest gadgets and electronics with best prices in Iraq.</p>
+            <a href="#" class="btn-buy">Shop Now</a>
+        </div>
+        <img src="https://www.apple.com/v/iphone-15-pro/c/images/overview/welcome/hero_endframe__ov6ewwmbhi6e_large.jpg" style="width: 40%; border-radius: 20px;" alt="iPhone">
     </section>
 
-    <section class="features" id="features">
-        <h2 class="section-title reveal">Core Technologies</h2>
-        <div class="f-card reveal">
-            <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" alt="AI"></div>
-            <h3>Neural Engines</h3>
-            <p>Advanced deep learning models designed for real-time decision making and pattern recognition.</p>
-        </div>
-        <div class="f-card reveal">
-            <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/4202/4202272.png" alt="Cloud"></div>
-            <h3>Quantum Cloud</h3>
-            <p>A distributed cloud infrastructure with zero-latency deployment capabilities for global scale.</p>
-        </div>
-        <div class="f-card reveal">
-            <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/2092/2092663.png" alt="Security"></div>
-            <h3>Cyber Guard</h3>
-            <p>Military-grade security protocols driven by AI to protect your data from next-gen threats.</p>
-        </div>
-    </section>
-
-    <section class="pricing" id="pricing">
-        <h2 class="section-title reveal">Simple Pricing</h2>
-        <div class="pricing-grid">
-            <div class="price-card reveal">
-                <h3>Starter</h3>
-                <div class="amount">$29<span>/mo</span></div>
-                <ul>
-                    <li>10,000 API Requests</li>
-                    <li>Standard AI Models</li>
-                    <li>Community Support</li>
-                </ul>
-                <a href="#" class="btn-price">Choose Starter</a>
+    <section class="products">
+        <h2 style="margin-bottom: 30px;">New Arrivals</h2>
+        <div class="grid">
+            <div class="p-card">
+                <img src="https://m.media-amazon.com/images/I/61S9aVnRZDL._AC_SL1500_.jpg" alt="PS5">
+                <h3>PlayStation 5 Slim</h3>
+                <p class="price">$499.00</p>
             </div>
-            <div class="price-card pro reveal">
-                <div class="badge">Recommended</div>
-                <h3>Professional</h3>
-                <div class="amount">$99<span>/mo</span></div>
-                <ul>
-                    <li>Unlimited API Access</li>
-                    <li>Custom Neural Training</li>
-                    <li>24/7 Priority Support</li>
-                    <li>Quantum Cloud Access</li>
-                </ul>
-                <a href="#" class="btn-price">Start Pro Trial</a>
+            <div class="p-card">
+                <img src="https://m.media-amazon.com/images/I/71YfM6T1LBL._AC_SL1500_.jpg" alt="MacBook">
+                <h3>MacBook Pro M3</h3>
+                <p class="price">$1,299.00</p>
             </div>
-            <div class="price-card reveal">
-                <h3>Enterprise</h3>
-                <div class="amount">Custom</div>
-                <ul>
-                    <li>Dedicated Infrastructure</li>
-                    <li>On-premise Deployment</li>
-                    <li>White-label Solutions</li>
-                </ul>
-                <a href="#" class="btn-price">Contact Sales</a>
+            <div class="p-card">
+                <img src="https://m.media-amazon.com/images/I/61o689X1kTL._AC_SL1500_.jpg" alt="AirPods">
+                <h3>AirPods Pro 2</h3>
+                <p class="price">$249.00</p>
             </div>
         </div>
     </section>
 
-    <footer>
-        <p class="footer-text">© 2026 NOVA ARTIFICIAL INTELLIGENCE • ALL RIGHTS RESERVED</p>
-    </footer>
-
-    <script>
-        // Scroll Reveal Animation Logic
-        function reveal() {
-            const reveals = document.querySelectorAll('.reveal');
-            reveals.forEach(el => {
-                const windowHeight = window.innerHeight;
-                const elementTop = el.getBoundingClientRect().top;
-                const elementVisible = 100;
-                if (elementTop < windowHeight - elementVisible) {
-                    el.classList.add('active');
-                }
-            });
-        }
-        window.addEventListener('scroll', reveal);
-        // Initial run
-        reveal();
-    </script>
 </body>
 </html>
