@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NOVA AI | Future of Technology</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366f1;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --accent: #10b981;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+
+        body { background-color: var(--dark); color: var(--light); overflow-x: hidden; }
+
+        /* Navbar */
+        nav {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 20px 10%; position: fixed; width: 100%; top: 0; z-index: 1000;
+            background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px);
+        }
+        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); letter-spacing: 1px; }
+        .nav-links { display: flex; gap: 30px; list-style: none; }
+        .nav-links a { color: var(--light); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary); }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+            padding: 0 20px;
+        }
+        .hero h1 { font-size: 4rem; font-weight: 800; margin-bottom: 20px; line-height: 1.1; }
+        .hero p { font-size: 1.2rem; color: #94a3b8; max-width: 600px; margin-bottom: 30px; }
+        .btn-main {
+            background: var(--primary); color: white; padding: 15px 40px;
+            border-radius: 50px; text-decoration: none; font-weight: 600;
+            transition: 0.4s; box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+        }
+        .btn-main:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(99, 102, 241, 0.5); }
+
+        /* Features Section */
+        .features { padding: 100px 10%; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .f-card {
+            background: #1e293b; padding: 40px; border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
+        }
+        .f-card:hover { transform: translateY(-10px); background: #26334d; }
+        .f-card h3 { color: var(--primary); margin-bottom: 15px; }
+        .f-card p { font-size: 0.9rem; color: #94a3b8; line-height: 1.6; }
+
+        /* Scroll Animation Class */
+        .reveal { opacity: 0; transform: translateY(30px); transition: 1s all ease; }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">NOVA.AI</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#features">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <section class="hero" id="home">
+        <h1 class="reveal">Intelligence <br><span style="color: var(--primary);">Redefined.</span></h1>
+        <p class="reveal">We build the next generation of artificial intelligence tools to empower your business growth.</p>
+        <a href="#features" class="btn-main reveal">Explore Solutions</a>
+    </section>
+
+    <section class="features" id="features">
+        <div class="f-card reveal">
+            <h3>Machine Learning</h3>
+            <p>Advanced algorithms that learn and adapt to your data patterns automatically.</p>
+        </div>
+        <div class="f-card reveal">
+            <h3>Cloud Integration</h3>
+            <p>Scalable cloud infrastructure designed for 99.9% uptime and global reach.</p>
+        </div>
+        <div class="f-card reveal">
+            <h3>Neural Networks</h3>
+            <p>Deep learning systems that mimic human processing for complex problem solving.</p>
+        </div>
+    </section>
+
+    <script>
+        // Simple Scroll Animation
+        window.addEventListener('scroll', reveal);
+        function reveal() {
+            var reveals = document.querySelectorAll('.reveal');
+            for (var i = 0; i < reveals.length; i++) {
+                var windowHeight = window.innerHeight;
+                var revealTop = reveals[i].getBoundingClientRect().top;
+                if (revealTop < windowHeight - 100) {
+                    reveals[i].classList.add('active');
+                }
+            }
+        }
+        // Run once on load
+        reveal();
+    </script>
+</body>
+</html>
