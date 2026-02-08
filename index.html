@@ -3,114 +3,197 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mustafa Store | FIB Payment</title>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700&display=swap" rel="stylesheet">
+    
+    <title>Mustafa Tech | باشترین فرۆشگای مۆبایل و تەکنەلۆژیا لە دهۆک</title>
+    <meta name="description" content="کڕینی مۆبایل و ئامێری تەکنەلۆژی بە باشترین نرخ لە دهۆک. پارەدان بە FIB و USDT. گەیاندن بۆ هەموو شوێنێک.">
+    <meta name="keywords" content="مۆبایل دهۆک, کڕینی ئایفۆن, FIB Duhok, Mustafa Tech, کریپتۆ کوردستان">
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
+    
     <style>
-        :root { --primary: #fbbf24; --bg: #0f172a; --card: #1e293b; --text: #f8fafc; }
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
-        body { background: var(--bg); color: var(--text); padding-bottom: 50px; text-align: right; }
-        
-        nav { padding: 20px 5%; background: rgba(15, 23, 42, 0.9); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid #334155; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); }
+        :root {
+            --primary: #fbbf24;
+            --bg: #0f172a;
+            --card: #1e293b;
+            --text: #f8fafc;
+            --accent: #25d366;
+        }
 
-        .container { padding: 40px 5%; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
+        body { background: var(--bg); color: var(--text); line-height: 1.6; }
+
+        /* Navbar */
+        nav {
+            padding: 20px 8%; background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid #334155;
+        }
+        .logo { font-size: 1.6rem; font-weight: 800; color: var(--primary); text-decoration: none; }
+
+        /* Hero Section */
+        .hero {
+            padding: 100px 8%; display: flex; align-items: center; justify-content: space-between;
+            background: radial-gradient(circle at 20% 30%, rgba(251, 191, 36, 0.05), transparent 40%);
+        }
+        .hero-text h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 20px; }
+        .hero-text span { color: var(--primary); }
+        .btn-main {
+            padding: 15px 40px; background: var(--primary); color: #000;
+            text-decoration: none; border-radius: 12px; font-weight: bold; display: inline-block;
+        }
+
+        /* Products Grid */
+        .container { padding: 80px 8%; }
+        .section-title { text-align: center; margin-bottom: 50px; font-size: 2rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
         
-        .product-card { background: var(--card); border-radius: 20px; padding: 20px; border: 1px solid #334155; transition: 0.3s; }
+        .product-card {
+            background: var(--card); border-radius: 24px; padding: 30px;
+            border: 1px solid #334155; transition: 0.4s; text-align: center;
+        }
         .product-card:hover { transform: translateY(-10px); border-color: var(--primary); }
-        .product-card img { width: 100%; height: 200px; object-fit: contain; margin-bottom: 15px; }
-        .product-card h3 { margin-bottom: 10px; }
-        .price { color: var(--primary); font-size: 1.2rem; font-weight: bold; margin-bottom: 20px; }
+        .product-card img { width: 100%; height: 220px; object-fit: contain; margin-bottom: 20px; }
+        .price { color: var(--primary); font-size: 1.4rem; font-weight: 800; margin: 15px 0; }
 
-        .btn-buy { width: 100%; padding: 12px; background: var(--primary); color: #000; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; }
+        /* Payment Modal */
+        .modal {
+            display: none; position: fixed; z-index: 2000; left: 0; top: 0;
+            width: 100%; height: 100%; background: rgba(0,0,0,0.85);
+        }
+        .modal-content {
+            background: #fff; color: #000; margin: 5% auto; padding: 30px;
+            width: 90%; max-width: 450px; border-radius: 28px; text-align: center;
+        }
+        .fib-box { background: #f8f9fa; padding: 20px; border-radius: 16px; margin: 20px 0; border-right: 6px solid #000; }
+        .upload-area { border: 2px dashed #cbd5e1; padding: 25px; border-radius: 16px; margin: 20px 0; cursor: pointer; }
+        .btn-whatsapp {
+            background: var(--accent); color: white; width: 100%; padding: 16px;
+            border: none; border-radius: 14px; font-weight: bold; cursor: pointer; font-size: 1.1rem;
+        }
 
-        /* Modal Payment Style */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); }
-        .modal-content { background: #fff; color: #000; margin: 10% auto; padding: 30px; width: 90%; max-width: 450px; border-radius: 24px; position: relative; }
-        .fib-info { background: #f1f5f9; padding: 15px; border-radius: 12px; margin: 20px 0; border-right: 5px solid #000; }
-        
-        .upload-box { border: 2px dashed #cbd5e1; padding: 20px; border-radius: 12px; margin: 20px 0; cursor: pointer; }
-        .btn-wa { background: #25d366; color: white; width: 100%; padding: 15px; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; font-size: 1rem; }
+        /* Contact & Map */
+        .contact-section { padding: 80px 8%; background: #0f172a; }
+        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        .map-container { height: 400px; border-radius: 24px; overflow: hidden; border: 2px solid #334155; }
+
+        @media (max-width: 768px) {
+            .hero { flex-direction: column; text-align: center; padding-top: 50px; }
+            .hero-text h1 { font-size: 2.5rem; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">MUSTAFA STORE</div>
-        <div style="font-size: 0.9rem;">بەردەستە بۆ دهۆک</div>
+        <a href="#" class="logo">MUSTAFA TECH</a>
+        <div style="font-weight: bold; font-size: 0.9rem;">📍 دهۆک، عێراق</div>
     </nav>
 
-    <div class="container">
-        <h2 style="margin-bottom: 30px;">بەرهەمەکان</h2>
+    <section class="hero">
+        <div class="hero-text">
+            <h1>داهاتوو لێرەیە<br><span>مۆدێرنترین مۆبایلەکان</span></h1>
+            <p style="margin-bottom: 30px; color: #94a3b8;">باشترین کوالێتی و گەرەنتی ڕاستەقینە لە دهۆک. ئێستا بە FIB پارە بدە.</p>
+            <a href="#products" class="btn-main">بینینی بەرهەمەکان</a>
+        </div>
+        <div class="hero-image">
+            <img src="https://www.apple.com/v/iphone-15-pro/c/images/overview/welcome/hero_endframe__ov6ewwmbhi6e_large.jpg" style="width: 100%; max-width: 400px;" alt="iPhone">
+        </div>
+    </section>
+
+    <div class="container" id="products">
+        <h2 class="section-title">نوێترین بەرهەمەکان</h2>
         <div class="grid">
             <div class="product-card">
-                <img src="https://m.media-amazon.com/images/I/71657Z6-tWL._AC_SL1500_.jpg" alt="iPhone">
+                <img src="https://m.media-amazon.com/images/I/71657Z6-tWL._AC_SL1500_.jpg" alt="iPhone 15">
                 <h3>iPhone 15 Pro Max</h3>
                 <p class="price">1,650,000 IQD</p>
-                <button class="btn-buy" onclick="openPayment('iPhone 15 Pro Max', '1,650,000')">کڕین بە FIB</button>
+                <button class="btn-main" style="width:100%" onclick="openPay('iPhone 15 Pro Max', '1,650,000')">کڕین (FIB)</button>
             </div>
             
             <div class="product-card">
-                <img src="https://m.media-amazon.com/images/I/61NfI-f+f+L._AC_SL1000_.jpg" alt="Ledger">
-                <h3>Ledger Nano X</h3>
-                <p class="price">210,000 IQD</p>
-                <button class="btn-buy" onclick="openPayment('Ledger Nano X', '210,000')">کڕین بە FIB</button>
+                <img src="https://m.media-amazon.com/images/I/71YfM6T1LBL._AC_SL1500_.jpg" alt="MacBook">
+                <h3>MacBook Pro M3</h3>
+                <p class="price">2,150,000 IQD</p>
+                <button class="btn-main" style="width:100%" onclick="openPay('MacBook Pro M3', '2,150,000')">کڕین (FIB)</button>
             </div>
         </div>
     </div>
 
-    <div id="paymentModal" class="modal">
+    <section class="contact-section">
+        <h2 class="section-title">پەیوەندی و ناونیشان</h2>
+        <div class="contact-grid">
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d51457.14631338604!2d42.94825944863281!3d36.8650633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4008ec1918365691%3A0x6e2671542f7041a3!2sDuhok!5e0!3m2!1sen!2siq!4v1700000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+            <div style="background: var(--card); padding: 40px; border-radius: 24px;">
+                <h3 style="margin-bottom: 20px; color: var(--primary);">زانیارییەکان</h3>
+                <p>📍 ناونیشان: دهۆک، شەقامی گشتی</p>
+                <p style="margin: 15px 0;">📞 مۆبایل: 07502293413</p>
+                <p>💬 واتسئەپ: 9647502293413</p>
+                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #334155;">
+                    <p style="font-size: 0.9rem; color: #94a3b8;">سەعاتی کارکردن: ٩ی بەیانی تا ٨ی ئێوارە</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="payModal" class="modal">
         <div class="modal-content">
-            <span onclick="closeModal()" style="float:left; cursor:pointer;">✕</span>
-            <h2 style="text-align: center; margin-bottom: 20px;">تەواوکردنی پارەدان</h2>
-            <p>بەرهەم: <span id="prodName" style="font-weight:bold;"></span></p>
-            <p>بڕی پارە: <span id="prodPrice" style="color:red; font-weight:bold;"></span></p>
+            <span onclick="closePay()" style="float:left; cursor:pointer; font-size: 1.5rem;">✕</span>
+            <h2>تەواوکردنی کڕین</h2>
+            <p style="margin-top:10px;">بەرهەم: <span id="pName" style="font-weight:bold;"></span></p>
+            <p>نرخ: <span id="pPrice" style="color: #dc2626; font-weight:bold;"></span></p>
             
-            <div class="fib-info">
-                <p>تکایە پارەکە بنێرە بۆ ئەکاونتی FIB:</p>
-                <strong style="font-size: 1.2rem;">ID: 2293413</strong>
+            <div class="fib-box">
+                <p>تکایە بڕی پارەکە بنێرە بۆ ئەم IDـەی FIB:</p>
+                <strong style="font-size: 1.5rem;">2293413</strong>
             </div>
 
-            <div class="upload-box" onclick="document.getElementById('fileInput').click()">
-                <p id="fileText">وێنەی پسوڵەکە (Screenshot) لێرە دابنێ</p>
-                <input type="file" id="fileInput" hidden accept="image/*" onchange="handleFile(event)">
-                <img id="preview" style="display:none; width:100%; margin-top:10px; border-radius:10px;">
+            <div class="upload-area" onclick="document.getElementById('fileInp').click()">
+                <p id="upText">وێنەی پسوڵەکە لێرە باربکە (Screenshot)</p>
+                <input type="file" id="fileInp" hidden onchange="showPreview(event)">
+                <img id="receiptPrev" style="display:none; width:100%; margin-top:15px; border-radius:12px;">
             </div>
 
-            <button class="btn-wa" onclick="sendWhatsApp()">ناردن بۆ واتسئەپی خاوەن دوکان</button>
+            <button class="btn-whatsapp" onclick="confirmToWA()">ناردنی پسوڵە بۆ واتسئەپ</button>
         </div>
     </div>
 
     <script>
-        let currentProduct = "";
-        let currentPrice = "";
+        let selProd = "";
+        let selPrice = "";
 
-        function openPayment(name, price) {
-            currentProduct = name;
-            currentPrice = price;
-            document.getElementById('prodName').innerText = name;
-            document.getElementById('prodPrice').innerText = price + " IQD";
-            document.getElementById('paymentModal').style.display = "block";
+        function openPay(name, price) {
+            selProd = name;
+            selPrice = price;
+            document.getElementById('pName').innerText = name;
+            document.getElementById('pPrice').innerText = price + " IQD";
+            document.getElementById('payModal').style.display = "block";
         }
 
-        function closeModal() {
-            document.getElementById('paymentModal').style.display = "none";
+        function closePay() {
+            document.getElementById('payModal').style.display = "none";
         }
 
-        function handleFile(event) {
-            const fileText = document.getElementById('fileText');
-            const preview = document.getElementById('preview');
-            fileText.innerText = "وێنەکە هەڵبژێردرا ✅";
-            preview.src = URL.createObjectURL(event.target.files[0]);
-            preview.style.display = "block";
+        function showPreview(event) {
+            const reader = new FileReader();
+            reader.onload = function() {
+                const img = document.getElementById('receiptPrev');
+                img.src = reader.result;
+                img.style.display = "block";
+                document.getElementById('upText').innerText = "پسوڵە هەڵبژێردرا ✅";
+            }
+            reader.readAsDataURL(event.target.files[0]);
         }
 
-        function sendWhatsApp() {
+        function confirmToWA() {
             const phone = "9647502293413";
-            const message = `سڵاو مستەفا، من دەمەوێت ئەم بەرهەمە بکڕم:\n\n📦 بەرهەم: ${currentProduct}\n💰 بڕی پارە: ${currentPrice} IQD\n\nتکایە چاوەڕێبە تا وێنەی پسوڵەکەت بۆ دەنێرم.`;
-            const url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
-            window.open(url, '_blank');
+            const text = `سڵاو مستەفا تێک،\nمن دەمەوێت ئەم بەرهەمە بکڕم:\n📦 بەرهەم: ${selProd}\n💰 نرخ: ${selPrice} IQD\n\nتکایە چاوەڕێبە تا وێنەی پسوڵەکەت بۆ دەنێرم.`;
+            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
         }
     </script>
+
 </body>
 </html>
