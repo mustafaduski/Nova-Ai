@@ -3,113 +3,164 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mustafa Crypto Tech | Next-Gen Store</title>
+    <title>Mustafa Crypto Tech | Web3 Store</title>
+    
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js" type="application/javascript"></script>
+    
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --bg: #050505;
             --card: #111111;
+            --primary: #00ffcc;
             --btc: #f7931a;
             --eth: #627eea;
             --usdt: #26a17b;
-            --primary: #00ffcc;
             --text: #ffffff;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Space Grotesk', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Space Grotesk', sans-serif; scroll-behavior: smooth; }
         body { background: var(--bg); color: var(--text); overflow-x: hidden; }
 
-        /* Crypto Ticker (نرخی دراوەکان) */
+        /* Crypto Ticker */
         .ticker-wrap {
-            background: #111; padding: 10px 0; border-bottom: 1px solid #222;
-            overflow: hidden; white-space: nowrap; font-size: 0.8rem; font-weight: bold;
+            background: #111; padding: 12px 0; border-bottom: 1px solid #222;
+            overflow: hidden; white-space: nowrap; font-size: 0.85rem; font-weight: bold;
         }
-        .ticker { display: inline-block; animation: scroll 20s linear infinite; }
+        .ticker { display: inline-block; animation: scroll 25s linear infinite; }
         .ticker span { margin-right: 50px; }
-        .btc-c { color: var(--btc); } .eth-c { color: var(--eth); } .usdt-c { color: var(--usdt); }
         @keyframes scroll { 0% { transform: translateX(100%); } 100% { transform: translateX(-100%); } }
 
+        /* Navigation */
         nav {
-            padding: 25px 8%; display: flex; justify-content: space-between; align-items: center;
-            background: rgba(5,5,5,0.8); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
+            padding: 20px 8%; display: flex; justify-content: space-between; align-items: center;
+            background: rgba(5,5,5,0.9); backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100;
+            border-bottom: 1px solid #222;
         }
         .logo { font-size: 1.6rem; font-weight: 700; color: var(--primary); text-shadow: 0 0 10px var(--primary); }
 
+        /* Hero Section */
         .hero {
-            padding: 100px 8%; display: flex; align-items: center; justify-content: space-between;
-            background: radial-gradient(circle at top right, #00ffcc15, transparent);
+            padding: 100px 8%; display: flex; align-items: center; justify-content: space-between; gap: 40px;
+            background: radial-gradient(circle at 70% 30%, #00ffcc10, transparent);
+            min-height: 85vh;
         }
-        .hero-content h1 { font-size: 4.5rem; line-height: 1; margin-bottom: 20px; }
+        .hero-content h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); line-height: 1; margin-bottom: 20px; }
         .hero-content span { color: var(--primary); }
-        .crypto-icons { display: flex; gap: 15px; margin-top: 20px; font-size: 1.2rem; opacity: 0.7; }
+        .hero-content p { color: #888; font-size: 1.1rem; max-width: 500px; margin-bottom: 30px; }
 
-        .btn-crypto {
-            background: var(--primary); color: #000; padding: 18px 40px;
-            border-radius: 5px; text-decoration: none; font-weight: 800;
-            display: inline-block; margin-top: 30px; transition: 0.3s;
-            clip-path: polygon(10% 0, 100% 0, 90% 100%, 0 100%); /* Cyberpunk style */
+        .btn-connect {
+            background: var(--primary); color: #000; padding: 14px 28px;
+            border-radius: 8px; border: none; font-weight: 800; cursor: pointer;
+            transition: 0.3s; box-shadow: 0 0 15px rgba(0, 255, 204, 0.3);
         }
-        .btn-crypto:hover { transform: scale(1.05); box-shadow: 0 0 30px var(--primary); }
+        .btn-connect:hover { transform: scale(1.05); box-shadow: 0 0 25px var(--primary); }
 
-        .grid { padding: 80px 8%; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        /* Product Grid */
+        .grid { padding: 80px 8%; display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
         .p-card {
-            background: var(--card); padding: 30px; border-radius: 15px;
+            background: var(--card); padding: 35px; border-radius: 20px;
             border: 1px solid #222; transition: 0.4s; text-align: center;
+            position: relative; overflow: hidden;
         }
         .p-card:hover { border-color: var(--primary); transform: translateY(-10px); }
-        .p-card img { width: 100%; height: 200px; object-fit: contain; margin-bottom: 20px; }
+        .p-card img { width: 100%; height: 220px; object-fit: contain; margin-bottom: 25px; }
+        .p-card h3 { margin-bottom: 15px; font-size: 1.3rem; }
         
-        .crypto-price { display: flex; justify-content: center; gap: 10px; margin-top: 15px; font-size: 0.9rem; }
-        .tag { padding: 4px 10px; border-radius: 4px; background: #222; font-weight: bold; }
+        .crypto-price { display: flex; justify-content: center; gap: 10px; margin-top: 20px; }
+        .tag { padding: 6px 12px; border-radius: 6px; background: #1a1a1a; font-weight: bold; font-size: 0.8rem; }
+
+        footer { padding: 40px; text-align: center; border-top: 1px solid #222; opacity: 0.5; font-size: 0.8rem; }
     </style>
 </head>
 <body>
 
     <div class="ticker-wrap">
-        <div class="ticker">
-            <span class="btc-c">BTC: $64,231.50 ▲</span>
-            <span class="eth-c">ETH: $3,452.12 ▲</span>
-            <span class="usdt-c">USDT: $1.00 ▬</span>
-            <span class="btc-c">SOL: $145.20 ▼</span>
+        <div class="ticker" id="live-ticker">
+            <span>BITCOIN: Loading...</span>
+            <span>ETHEREUM: Loading...</span>
+            <span>TETHER: Loading...</span>
+            <span>SOLANA: Loading...</span>
         </div>
     </div>
 
     <nav>
         <div class="logo">MUSTAFA.WEB3</div>
-        <div style="font-weight: 500;">Connect Wallet</div>
+        <button id="wallet-btn" class="btn-connect" onclick="connectWallet()">Connect Trust Wallet</button>
     </nav>
 
     <section class="hero">
         <div class="hero-content">
-            <h1>Future Tech<br><span>Crypto Pay.</span></h1>
-            <p style="color: #888; margin-top: 20px;">Buy the latest hardware using BTC, ETH, or USDT. Fast, secure, and decentralized.</p>
-            <div class="crypto-icons">₿ | Ξ | ₮</div>
-            <a href="#shop" class="btn-crypto">START SHOPPING</a>
+            <h1>Hardware<br><span>Web3 Ready.</span></h1>
+            <p>The first tech store in Iraq allowing you to checkout with BTC, ETH, and USDT directly from your Trust Wallet.</p>
+            <a href="#shop" class="btn-connect" style="text-decoration: none; display: inline-block;">Shop Collection</a>
         </div>
-        <img src="https://www.apple.com/v/iphone-15-pro/c/images/overview/welcome/hero_endframe__ov6ewwmbhi6e_large.jpg" style="width: 40%; filter: hue-rotate(150deg);" alt="Crypto Phone">
+        <img src="https://www.apple.com/v/iphone-15-pro/c/images/overview/welcome/hero_endframe__ov6ewwmbhi6e_large.jpg" style="width: 45%; filter: hue-rotate(140deg) brightness(0.8);" alt="Web3 Device">
     </section>
 
     <section class="grid" id="shop">
         <div class="p-card">
             <img src="https://m.media-amazon.com/images/I/61S9aVnRZDL._AC_SL1500_.jpg" alt="PS5">
-            <h3>PlayStation 5 Slim</h3>
+            <h3>PlayStation 5 Pro</h3>
             <div class="crypto-price">
-                <span class="tag btc-c">0.0075 BTC</span>
-                <span class="tag usdt-c">480 USDT</span>
+                <span class="tag" style="color: var(--btc);">0.0078 BTC</span>
+                <span class="tag" style="color: var(--usdt);">499 USDT</span>
             </div>
-            <button onclick="alert('Redirecting to Crypto Wallet...')" style="margin-top:20px; width:100%; padding:10px; background:none; border:1px solid var(--primary); color:var(--primary); cursor:pointer;">Pay with Crypto</button>
+            <button onclick="payWithCrypto()" style="margin-top:25px; width:100%; padding:12px; background:none; border:1px solid var(--primary); color:var(--primary); cursor:pointer; font-weight:bold; border-radius:8px;">Buy with Crypto</button>
         </div>
 
         <div class="p-card">
             <img src="https://m.media-amazon.com/images/I/71YfM6T1LBL._AC_SL1500_.jpg" alt="MacBook">
-            <h3>MacBook Pro M3</h3>
+            <h3>MacBook Pro M3 Max</h3>
             <div class="crypto-price">
-                <span class="tag eth-c">0.42 ETH</span>
-                <span class="tag usdt-c">1450 USDT</span>
+                <span class="tag" style="color: var(--eth);">0.45 ETH</span>
+                <span class="tag" style="color: var(--usdt);">1599 USDT</span>
             </div>
-            <button onclick="alert('Redirecting to Crypto Wallet...')" style="margin-top:20px; width:100%; padding:10px; background:none; border:1px solid var(--primary); color:var(--primary); cursor:pointer;">Pay with Crypto</button>
+            <button onclick="payWithCrypto()" style="margin-top:25px; width:100%; padding:12px; background:none; border:1px solid var(--primary); color:var(--primary); cursor:pointer; font-weight:bold; border-radius:8px;">Buy with Crypto</button>
         </div>
     </section>
 
+    <footer>
+        © 2026 MUSTAFA WEB3 STORE • POWERED BY BLOCKCHAIN
+    </footer>
+
+    <script>
+        // 1. Fetch Live Crypto Prices
+        async function fetchPrices() {
+            try {
+                const res = await fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin,ethereum,tether,solana&vs_currencies=usd');
+                const data = await res.json();
+                document.getElementById('live-ticker').innerHTML = `
+                    <span style="color: var(--btc)">BTC: $${data.bitcoin.usd.toLocaleString()}</span>
+                    <span style="color: var(--eth)">ETH: $${data.ethereum.usd.toLocaleString()}</span>
+                    <span style="color: var(--usdt)">USDT: $${data.tether.usd.toFixed(2)}</span>
+                    <span style="color: var(--primary)">SOL: $${data.solana.usd.toLocaleString()}</span>
+                `;
+            } catch (e) { console.log("Price fetch failed"); }
+        }
+        setInterval(fetchPrices, 60000);
+        fetchPrices();
+
+        // 2. Connect Wallet Logic
+        async function connectWallet() {
+            if (window.ethereum) {
+                try {
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    const address = accounts[0];
+                    document.getElementById('wallet-btn').innerText = address.substring(0,6) + "..." + address.substring(address.length-4);
+                    document.getElementById('wallet-btn').style.background = "#26a17b";
+                    alert("Trust Wallet Connected Successfully!");
+                } catch (err) { alert("Connection Rejected"); }
+            } else {
+                alert("Please open this site inside Trust Wallet DApp Browser");
+                window.open('https://trustwallet.com/', '_blank');
+            }
+        }
+
+        function payWithCrypto() {
+            alert("This feature requires a Smart Contract. Wallet is ready for transaction!");
+        }
+    </script>
 </body>
 </html>
