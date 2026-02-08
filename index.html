@@ -4,21 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
-    <title>Mustafa Tech | باشترین فرۆشگای مۆبایل و تەکنەلۆژیا لە دهۆک</title>
-    <meta name="description" content="کڕینی مۆبایل و ئامێری تەکنەلۆژی بە باشترین نرخ لە دهۆک. پارەدان بە FIB و USDT. گەیاندن بۆ هەموو شوێنێک.">
-    <meta name="keywords" content="مۆبایل دهۆک, کڕینی ئایفۆن, FIB Duhok, Mustafa Tech, کریپتۆ کوردستان">
+    <title>Mustafa Tech | باشترین فرۆشگای تەکنەلۆژیا لە دهۆک</title>
+    <meta name="description" content="کڕینی مۆبایل و ئامێری تەکنەلۆژی لە دهۆک. پارەدان بە FIB و وەرگرتنی پسوڵەی دیجیتاڵی.">
+    <meta name="keywords" content="مۆبایل دهۆک, کڕینی ئایفۆن دهۆک, FIB Duhok, Mustafa Tech">
     
+    <link rel="manifest" href="/manifest.json">
+    <meta name="theme-color" content="#fbbf24">
+
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap" rel="stylesheet">
     
     <style>
-        :root {
-            --primary: #fbbf24;
-            --bg: #0f172a;
-            --card: #1e293b;
-            --text: #f8fafc;
-            --accent: #25d366;
-        }
-
+        :root { --primary: #fbbf24; --bg: #0f172a; --card: #1e293b; --text: #f8fafc; --accent: #25d366; }
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
         body { background: var(--bg); color: var(--text); line-height: 1.6; }
 
@@ -32,144 +28,99 @@
         .logo { font-size: 1.6rem; font-weight: 800; color: var(--primary); text-decoration: none; }
 
         /* Hero Section */
-        .hero {
-            padding: 100px 8%; display: flex; align-items: center; justify-content: space-between;
-            background: radial-gradient(circle at 20% 30%, rgba(251, 191, 36, 0.05), transparent 40%);
-        }
-        .hero-text h1 { font-size: 3.5rem; line-height: 1.2; margin-bottom: 20px; }
-        .hero-text span { color: var(--primary); }
-        .btn-main {
-            padding: 15px 40px; background: var(--primary); color: #000;
-            text-decoration: none; border-radius: 12px; font-weight: bold; display: inline-block;
-        }
+        .hero { padding: 80px 8%; text-align: center; background: radial-gradient(circle at center, rgba(251, 191, 36, 0.1), transparent); }
+        .hero h1 { font-size: 3rem; margin-bottom: 20px; }
+        .hero span { color: var(--primary); }
 
         /* Products Grid */
-        .container { padding: 80px 8%; }
-        .section-title { text-align: center; margin-bottom: 50px; font-size: 2rem; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
-        
+        .container { padding: 40px 8%; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
         .product-card {
-            background: var(--card); border-radius: 24px; padding: 30px;
-            border: 1px solid #334155; transition: 0.4s; text-align: center;
+            background: var(--card); border-radius: 24px; padding: 25px;
+            border: 1px solid #334155; transition: 0.3s; text-align: center;
         }
         .product-card:hover { transform: translateY(-10px); border-color: var(--primary); }
-        .product-card img { width: 100%; height: 220px; object-fit: contain; margin-bottom: 20px; }
-        .price { color: var(--primary); font-size: 1.4rem; font-weight: 800; margin: 15px 0; }
+        .product-card img { width: 100%; height: 200px; object-fit: contain; }
+        .price { color: var(--primary); font-size: 1.4rem; font-weight: bold; margin: 15px 0; }
 
-        /* Payment Modal */
-        .modal {
-            display: none; position: fixed; z-index: 2000; left: 0; top: 0;
-            width: 100%; height: 100%; background: rgba(0,0,0,0.85);
-        }
-        .modal-content {
-            background: #fff; color: #000; margin: 5% auto; padding: 30px;
-            width: 90%; max-width: 450px; border-radius: 28px; text-align: center;
-        }
-        .fib-box { background: #f8f9fa; padding: 20px; border-radius: 16px; margin: 20px 0; border-right: 6px solid #000; }
-        .upload-area { border: 2px dashed #cbd5e1; padding: 25px; border-radius: 16px; margin: 20px 0; cursor: pointer; }
-        .btn-whatsapp {
-            background: var(--accent); color: white; width: 100%; padding: 16px;
-            border: none; border-radius: 14px; font-weight: bold; cursor: pointer; font-size: 1.1rem;
-        }
+        /* Modal & Invoice */
+        .modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); overflow-y: auto; }
+        .modal-content { background: #fff; color: #000; margin: 5% auto; padding: 30px; width: 90%; max-width: 450px; border-radius: 28px; }
+        .fib-box { background: #f1f5f9; padding: 20px; border-radius: 16px; margin: 15px 0; border-right: 5px solid #000; }
+        #invoice-box { display: none; margin-top: 20px; padding: 15px; border: 2px dashed #cbd5e1; border-radius: 12px; text-align: right; font-size: 0.9rem; }
+        
+        .btn-main { background: var(--primary); color: #000; padding: 12px 25px; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; width: 100%; font-size: 1rem; }
+        .btn-wa { background: var(--accent); color: #fff; padding: 15px; border: none; border-radius: 12px; font-weight: bold; cursor: pointer; width: 100%; margin-top: 15px; }
 
-        /* Contact & Map */
-        .contact-section { padding: 80px 8%; background: #0f172a; }
-        .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
-        .map-container { height: 400px; border-radius: 24px; overflow: hidden; border: 2px solid #334155; }
-
-        @media (max-width: 768px) {
-            .hero { flex-direction: column; text-align: center; padding-top: 50px; }
-            .hero-text h1 { font-size: 2.5rem; }
-            .contact-grid { grid-template-columns: 1fr; }
-        }
+        /* WhatsApp Float */
+        .wa-float { position: fixed; bottom: 20px; right: 20px; background: var(--accent); border-radius: 50%; padding: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.4); z-index: 3000; transition: 0.3s; }
+        .wa-float:hover { transform: scale(1.1); }
     </style>
 </head>
-<body>
-
-    <nav>
+<body oncontextmenu="return false;"> <nav>
         <a href="#" class="logo">MUSTAFA TECH</a>
-        <div style="font-weight: bold; font-size: 0.9rem;">📍 دهۆک، عێراق</div>
+        <div style="font-size: 0.8rem; background: #334155; padding: 5px 12px; border-radius: 20px;">Duhok Branch</div>
     </nav>
 
     <section class="hero">
-        <div class="hero-text">
-            <h1>داهاتوو لێرەیە<br><span>مۆدێرنترین مۆبایلەکان</span></h1>
-            <p style="margin-bottom: 30px; color: #94a3b8;">باشترین کوالێتی و گەرەنتی ڕاستەقینە لە دهۆک. ئێستا بە FIB پارە بدە.</p>
-            <a href="#products" class="btn-main">بینینی بەرهەمەکان</a>
-        </div>
-        <div class="hero-image">
-            <img src="https://www.apple.com/v/iphone-15-pro/c/images/overview/welcome/hero_endframe__ov6ewwmbhi6e_large.jpg" style="width: 100%; max-width: 400px;" alt="iPhone">
-        </div>
+        <h1>هەموو شتێکی تەکنەلۆژی لای <span>مستەفایە</span></h1>
+        <p>باشترین نرخ و خێراترین گەیاندن لە دهۆک</p>
     </section>
 
-    <div class="container" id="products">
-        <h2 class="section-title">نوێترین بەرهەمەکان</h2>
+    <div class="container">
         <div class="grid">
             <div class="product-card">
-                <img src="https://m.media-amazon.com/images/I/71657Z6-tWL._AC_SL1500_.jpg" alt="iPhone 15">
+                <img src="https://m.media-amazon.com/images/I/71657Z6-tWL._AC_SL1500_.jpg" alt="iPhone">
                 <h3>iPhone 15 Pro Max</h3>
                 <p class="price">1,650,000 IQD</p>
-                <button class="btn-main" style="width:100%" onclick="openPay('iPhone 15 Pro Max', '1,650,000')">کڕین (FIB)</button>
+                <button class="btn-main" onclick="openPay('iPhone 15 Pro Max', '1,650,000')">کڕین بە FIB</button>
             </div>
-            
             <div class="product-card">
                 <img src="https://m.media-amazon.com/images/I/71YfM6T1LBL._AC_SL1500_.jpg" alt="MacBook">
                 <h3>MacBook Pro M3</h3>
                 <p class="price">2,150,000 IQD</p>
-                <button class="btn-main" style="width:100%" onclick="openPay('MacBook Pro M3', '2,150,000')">کڕین (FIB)</button>
+                <button class="btn-main" onclick="openPay('MacBook Pro M3', '2,150,000')">کڕین بە FIB</button>
             </div>
         </div>
     </div>
 
-    <section class="contact-section">
-        <h2 class="section-title">پەیوەندی و ناونیشان</h2>
-        <div class="contact-grid">
-            <div class="map-container">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d51457.14631338604!2d42.94825944863281!3d36.8650633!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4008ec1918365691%3A0x6e2671542f7041a3!2sDuhok!5e0!3m2!1sen!2siq!4v1700000000000" width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"></iframe>
-            </div>
-            <div style="background: var(--card); padding: 40px; border-radius: 24px;">
-                <h3 style="margin-bottom: 20px; color: var(--primary);">زانیارییەکان</h3>
-                <p>📍 ناونیشان: دهۆک، شەقامی گشتی</p>
-                <p style="margin: 15px 0;">📞 مۆبایل: 07502293413</p>
-                <p>💬 واتسئەپ: 9647502293413</p>
-                <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #334155;">
-                    <p style="font-size: 0.9rem; color: #94a3b8;">سەعاتی کارکردن: ٩ی بەیانی تا ٨ی ئێوارە</p>
-                </div>
-            </div>
-        </div>
-    </section>
+    <a href="https://wa.me/9647502293413" class="wa-float" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" width="35" height="35" alt="WhatsApp">
+    </a>
 
     <div id="payModal" class="modal">
         <div class="modal-content">
             <span onclick="closePay()" style="float:left; cursor:pointer; font-size: 1.5rem;">✕</span>
-            <h2>تەواوکردنی کڕین</h2>
-            <p style="margin-top:10px;">بەرهەم: <span id="pName" style="font-weight:bold;"></span></p>
-            <p>نرخ: <span id="pPrice" style="color: #dc2626; font-weight:bold;"></span></p>
+            <h2 style="margin-bottom: 20px;">تەواوکردنی داواکاری</h2>
             
             <div class="fib-box">
-                <p>تکایە بڕی پارەکە بنێرە بۆ ئەم IDـەی FIB:</p>
-                <strong style="font-size: 1.5rem;">2293413</strong>
+                <p>بڕی پارەکە بنێرە بۆ ئەم IDـەی FIB:</p>
+                <strong style="font-size: 1.4rem;">2293413</strong>
             </div>
 
-            <div class="upload-area" onclick="document.getElementById('fileInp').click()">
-                <p id="upText">وێنەی پسوڵەکە لێرە باربکە (Screenshot)</p>
-                <input type="file" id="fileInp" hidden onchange="showPreview(event)">
-                <img id="receiptPrev" style="display:none; width:100%; margin-top:15px; border-radius:12px;">
+            <div id="invoice-box">
+                <h4 style="text-align:center; border-bottom:1px solid #eee; margin-bottom:10px;">پسوڵەی فەرمی</h4>
+                <p>📦 بەرهەم: <span id="invName"></span></p>
+                <p>💰 نرخ: <span id="invPrice"></span></p>
+                <p>📅 ڕێکەوت: <span id="invDate"></span></p>
+                <p style="color: #25d366; font-weight: bold; text-align: center; margin-top: 10px;">باری پسوڵە: چاوەڕوانی وێنە</p>
             </div>
 
-            <button class="btn-whatsapp" onclick="confirmToWA()">ناردنی پسوڵە بۆ واتسئەپ</button>
+            <button class="btn-wa" onclick="sendToWA()">ناردنی پسوڵە بۆ واتسئەپ</button>
         </div>
     </div>
 
     <script>
-        let selProd = "";
-        let selPrice = "";
+        let currentP = "";
+        let currentPr = "";
 
         function openPay(name, price) {
-            selProd = name;
-            selPrice = price;
-            document.getElementById('pName').innerText = name;
-            document.getElementById('pPrice').innerText = price + " IQD";
+            currentP = name;
+            currentPr = price;
+            document.getElementById('invName').innerText = name;
+            document.getElementById('invPrice').innerText = price + " IQD";
+            document.getElementById('invDate').innerText = new Date().toLocaleDateString('ku-IQ');
+            document.getElementById('invoice-box').style.display = "block";
             document.getElementById('payModal').style.display = "block";
         }
 
@@ -177,23 +128,18 @@
             document.getElementById('payModal').style.display = "none";
         }
 
-        function showPreview(event) {
-            const reader = new FileReader();
-            reader.onload = function() {
-                const img = document.getElementById('receiptPrev');
-                img.src = reader.result;
-                img.style.display = "block";
-                document.getElementById('upText').innerText = "پسوڵە هەڵبژێردرا ✅";
-            }
-            reader.readAsDataURL(event.target.files[0]);
-        }
-
-        function confirmToWA() {
+        function sendToWA() {
             const phone = "9647502293413";
-            const text = `سڵاو مستەفا تێک،\nمن دەمەوێت ئەم بەرهەمە بکڕم:\n📦 بەرهەم: ${selProd}\n💰 نرخ: ${selPrice} IQD\n\nتکایە چاوەڕێبە تا وێنەی پسوڵەکەت بۆ دەنێرم.`;
+            const text = `🛍 داواکاری نوێ لە لایەن مستەفا تێک:\n\n📦 بەرهەم: ${currentP}\n💰 نرخ: ${currentPr} IQD\n📅 ڕێکەوت: ${new Date().toLocaleDateString()}\n\nتکایە وێنەی پسوڵەی FIB لێرە دابنێ...`;
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`, '_blank');
         }
-    </script>
 
+        // Disable F12 and Shortcuts
+        document.onkeydown = function(e) {
+            if (e.keyCode == 123 || (e.ctrlKey && e.shiftKey && e.keyCode == 73) || (e.ctrlKey && e.keyCode == 85)) {
+                return false;
+            }
+        };
+    </script>
 </body>
 </html>
