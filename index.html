@@ -4,28 +4,42 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NOVA AI | Future of Technology</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;800&display=swap" rel="stylesheet">
+    
+    <meta name="description" content="NOVA AI delivers next-gen artificial intelligence solutions and quantum cloud services.">
+    <meta property="og:title" content="NOVA AI | Intelligence Redefined">
+    <meta property="og:description" content="Explore advanced AI engines and quantum cloud solutions.">
+    <meta property="og:type" content="website">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
     <style>
         :root {
             --primary: #6366f1;
             --dark: #0f172a;
             --light: #f8fafc;
             --accent: #10b981;
+            --card-bg: #1e293b;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
 
-        body { background-color: var(--dark); color: var(--light); overflow-x: hidden; }
+        body { background-color: var(--dark); color: var(--light); overflow-x: hidden; line-height: 1.6; }
 
-        /* Navbar */
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: var(--dark); }
+        ::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 5px; }
+
+        /* Navigation */
         nav {
             display: flex; justify-content: space-between; align-items: center;
             padding: 20px 10%; position: fixed; width: 100%; top: 0; z-index: 1000;
-            background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.85); backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
         }
-        .logo { font-weight: 800; font-size: 1.5rem; color: var(--primary); letter-spacing: 1px; }
+        .logo { font-weight: 800; font-size: 1.6rem; color: var(--primary); letter-spacing: 1px; }
         .nav-links { display: flex; gap: 30px; list-style: none; }
-        .nav-links a { color: var(--light); text-decoration: none; font-size: 0.9rem; transition: 0.3s; }
+        .nav-links a { color: var(--light); text-decoration: none; font-size: 0.9rem; font-weight: 500; transition: 0.3s; }
         .nav-links a:hover { color: var(--primary); }
 
         /* Hero Section */
@@ -35,29 +49,71 @@
             background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
             padding: 0 20px;
         }
-        .hero h1 { font-size: 4rem; font-weight: 800; margin-bottom: 20px; line-height: 1.1; }
-        .hero p { font-size: 1.2rem; color: #94a3b8; max-width: 600px; margin-bottom: 30px; }
+        .hero h1 { font-size: clamp(2.5rem, 8vw, 4.5rem); font-weight: 800; margin-bottom: 20px; line-height: 1.1; letter-spacing: -2px; }
+        .hero p { font-size: 1.2rem; color: #94a3b8; max-width: 700px; margin-bottom: 40px; }
         .btn-main {
-            background: var(--primary); color: white; padding: 15px 40px;
-            border-radius: 50px; text-decoration: none; font-weight: 600;
-            transition: 0.4s; box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
+            background: var(--primary); color: white; padding: 18px 45px;
+            border-radius: 50px; text-decoration: none; font-weight: 700;
+            transition: 0.4s; box-shadow: 0 10px 25px rgba(99, 102, 241, 0.4);
         }
-        .btn-main:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(99, 102, 241, 0.5); }
+        .btn-main:hover { transform: translateY(-5px); box-shadow: 0 15px 35px rgba(99, 102, 241, 0.6); }
 
         /* Features Section */
-        .features { padding: 100px 10%; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 30px; }
+        .section-title { text-align: center; font-size: 2.5rem; margin-bottom: 60px; font-weight: 800; }
+        .features { padding: 100px 10%; display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        
         .f-card {
-            background: #1e293b; padding: 40px; border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
+            background: var(--card-bg); padding: 45px; border-radius: 24px;
+            border: 1px solid rgba(255,255,255,0.05); transition: 0.4s ease;
+            position: relative; overflow: hidden;
         }
-        .f-card:hover { transform: translateY(-10px); background: #26334d; }
-        .f-card h3 { color: var(--primary); margin-bottom: 15px; }
-        .f-card p { font-size: 0.9rem; color: #94a3b8; line-height: 1.6; }
+        .f-card:hover { transform: translateY(-10px); background: #26334d; border-color: var(--primary); }
+        
+        .icon-box {
+            width: 60px; height: 60px; margin-bottom: 25px;
+            background: rgba(99, 102, 241, 0.1); border-radius: 15px;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .icon-box img { width: 35px; height: 35px; filter: drop-shadow(0 0 5px var(--primary)); }
+        .f-card h3 { font-size: 1.4rem; margin-bottom: 15px; color: var(--light); }
+        .f-card p { font-size: 0.95rem; color: #94a3b8; }
 
-        /* Scroll Animation Class */
-        .reveal { opacity: 0; transform: translateY(30px); transition: 1s all ease; }
+        /* Pricing Section */
+        .pricing { padding: 100px 10%; background: #0b1120; }
+        .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; }
+        
+        .price-card {
+            background: var(--card-bg); padding: 45px; border-radius: 28px;
+            text-align: center; border: 1px solid rgba(255,255,255,0.05);
+            transition: 0.4s; position: relative;
+        }
+        .price-card.pro { border: 2px solid var(--primary); transform: scale(1.05); z-index: 10; }
+        .badge {
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            background: var(--primary); color: #000; padding: 6px 18px;
+            border-radius: 20px; font-size: 0.75rem; font-weight: 800; text-transform: uppercase;
+        }
+        .amount { font-size: 3.5rem; font-weight: 800; margin: 25px 0; color: var(--primary); }
+        .amount span { font-size: 1rem; color: #94a3b8; }
+        .price-card ul { list-style: none; margin-bottom: 35px; text-align: left; }
+        .price-card ul li { margin-bottom: 15px; font-size: 0.9rem; color: #cbd5e1; display: flex; align-items: center; }
+        .price-card ul li::before { content: "✓"; color: var(--accent); margin-right: 12px; font-weight: bold; }
+        
+        .btn-price {
+            display: block; padding: 15px; border: 1.5px solid var(--primary);
+            color: var(--primary); text-decoration: none; border-radius: 15px;
+            font-weight: 700; transition: 0.3s;
+        }
+        .price-card.pro .btn-price { background: var(--primary); color: #000; }
+        .btn-price:hover { background: var(--primary); color: #000; box-shadow: 0 0 25px rgba(99, 102, 241, 0.4); }
+
+        /* Footer */
+        footer { padding: 60px 10%; text-align: center; border-top: 1px solid rgba(255,255,255,0.05); }
+        .footer-text { font-size: 0.8rem; color: #64748b; letter-spacing: 2px; }
+
+        /* Reveal Animations */
+        .reveal { opacity: 0; transform: translateY(40px); transition: 1.2s cubic-bezier(0.17, 0.67, 0.83, 0.67) all; }
         .reveal.active { opacity: 1; transform: translateY(0); }
-
     </style>
 </head>
 <body>
@@ -66,46 +122,93 @@
         <div class="logo">NOVA.AI</div>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
-            <li><a href="#features">Services</a></li>
-            <li><a href="#contact">Contact</a></li>
+            <li><a href="#features">Features</a></li>
+            <li><a href="#pricing">Pricing</a></li>
         </ul>
     </nav>
 
     <section class="hero" id="home">
         <h1 class="reveal">Intelligence <br><span style="color: var(--primary);">Redefined.</span></h1>
-        <p class="reveal">We build the next generation of artificial intelligence tools to empower your business growth.</p>
-        <a href="#features" class="btn-main reveal">Explore Solutions</a>
+        <p class="reveal">Empowering the world's most innovative companies with quantum-grade artificial intelligence and cloud-native neural engines.</p>
+        <a href="#features" class="btn-main reveal">Get Started Now</a>
     </section>
 
     <section class="features" id="features">
+        <h2 class="section-title reveal">Core Technologies</h2>
         <div class="f-card reveal">
-            <h3>Machine Learning</h3>
-            <p>Advanced algorithms that learn and adapt to your data patterns automatically.</p>
+            <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/2103/2103633.png" alt="AI"></div>
+            <h3>Neural Engines</h3>
+            <p>Advanced deep learning models designed for real-time decision making and pattern recognition.</p>
         </div>
         <div class="f-card reveal">
-            <h3>Cloud Integration</h3>
-            <p>Scalable cloud infrastructure designed for 99.9% uptime and global reach.</p>
+            <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/4202/4202272.png" alt="Cloud"></div>
+            <h3>Quantum Cloud</h3>
+            <p>A distributed cloud infrastructure with zero-latency deployment capabilities for global scale.</p>
         </div>
         <div class="f-card reveal">
-            <h3>Neural Networks</h3>
-            <p>Deep learning systems that mimic human processing for complex problem solving.</p>
+            <div class="icon-box"><img src="https://cdn-icons-png.flaticon.com/512/2092/2092663.png" alt="Security"></div>
+            <h3>Cyber Guard</h3>
+            <p>Military-grade security protocols driven by AI to protect your data from next-gen threats.</p>
         </div>
     </section>
 
+    <section class="pricing" id="pricing">
+        <h2 class="section-title reveal">Simple Pricing</h2>
+        <div class="pricing-grid">
+            <div class="price-card reveal">
+                <h3>Starter</h3>
+                <div class="amount">$29<span>/mo</span></div>
+                <ul>
+                    <li>10,000 API Requests</li>
+                    <li>Standard AI Models</li>
+                    <li>Community Support</li>
+                </ul>
+                <a href="#" class="btn-price">Choose Starter</a>
+            </div>
+            <div class="price-card pro reveal">
+                <div class="badge">Recommended</div>
+                <h3>Professional</h3>
+                <div class="amount">$99<span>/mo</span></div>
+                <ul>
+                    <li>Unlimited API Access</li>
+                    <li>Custom Neural Training</li>
+                    <li>24/7 Priority Support</li>
+                    <li>Quantum Cloud Access</li>
+                </ul>
+                <a href="#" class="btn-price">Start Pro Trial</a>
+            </div>
+            <div class="price-card reveal">
+                <h3>Enterprise</h3>
+                <div class="amount">Custom</div>
+                <ul>
+                    <li>Dedicated Infrastructure</li>
+                    <li>On-premise Deployment</li>
+                    <li>White-label Solutions</li>
+                </ul>
+                <a href="#" class="btn-price">Contact Sales</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p class="footer-text">© 2026 NOVA ARTIFICIAL INTELLIGENCE • ALL RIGHTS RESERVED</p>
+    </footer>
+
     <script>
-        // Simple Scroll Animation
-        window.addEventListener('scroll', reveal);
+        // Scroll Reveal Animation Logic
         function reveal() {
-            var reveals = document.querySelectorAll('.reveal');
-            for (var i = 0; i < reveals.length; i++) {
-                var windowHeight = window.innerHeight;
-                var revealTop = reveals[i].getBoundingClientRect().top;
-                if (revealTop < windowHeight - 100) {
-                    reveals[i].classList.add('active');
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                const elementVisible = 100;
+                if (elementTop < windowHeight - elementVisible) {
+                    el.classList.add('active');
                 }
-            }
+            });
         }
-        // Run once on load
+        window.addEventListener('scroll', reveal);
+        // Initial run
         reveal();
     </script>
 </body>
