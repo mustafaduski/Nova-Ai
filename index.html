@@ -1,163 +1,42 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mustafa Pro | Premium Web3 Store</title>
-    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;500;800&display=swap" rel="stylesheet">
+<div class="fib-checkout">
+    <div class="fib-header">
+        <img src="https://fib.iq/assets/img/logo.png" alt="FIB Logo" style="width: 80px;">
+        <h3>پارەدان لە ڕێگەی FIB</h3>
+    </div>
     
-    <style>
-        :root {
-            --bg: #020617;
-            --card: #0f172a;
-            --primary: #00ffcc;
-            --accent: #38bdf8;
-            --text: #f8fafc;
-        }
-
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; scroll-behavior: smooth; }
-        body { background: var(--bg); color: var(--text); overflow-x: hidden; }
-
-        /* Navbar */
-        nav {
-            padding: 20px 8%; display: flex; justify-content: space-between; align-items: center;
-            background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(15px); position: sticky; top: 0; z-index: 1000;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary); letter-spacing: -1px; }
-
-        /* Hero Section - پڕۆفیشناڵ */
-        .hero {
-            display: flex; align-items: center; justify-content: space-between;
-            padding: 100px 8%; min-height: 90vh;
-            background: radial-gradient(circle at 80% 20%, rgba(0, 255, 204, 0.05), transparent 50%);
-        }
-        .hero-content { max-width: 600px; }
-        .badge { 
-            background: rgba(0, 255, 204, 0.1); color: var(--primary); 
-            padding: 6px 15px; border-radius: 50px; font-size: 0.8rem; font-weight: bold;
-            border: 1px solid rgba(0, 255, 204, 0.2);
-        }
-        .hero-content h1 { font-size: 4.5rem; line-height: 1.1; margin: 25px 0; font-weight: 800; }
-        .hero-content span { background: linear-gradient(90deg, var(--primary), var(--accent)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        
-        .hero-visual { position: relative; width: 45%; display: flex; justify-content: center; }
-        .floating-img { 
-            width: 100%; max-width: 400px; 
-            filter: drop-shadow(0 20px 50px rgba(0,0,0,0.6));
-            animation: float 5s ease-in-out infinite;
-        }
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
-
-        /* Tabs & Store */
-        .tabs-container { text-align: center; margin: 60px 0; }
-        .tab-btn {
-            background: none; border: 1px solid rgba(255,255,255,0.1); color: #94a3b8;
-            padding: 12px 35px; cursor: pointer; border-radius: 12px; margin: 5px;
-            font-weight: 600; transition: 0.4s;
-        }
-        .tab-btn.active { background: var(--primary); color: #020617; border-color: var(--primary); box-shadow: 0 0 20px rgba(0,255,204,0.3); }
-
-        .tab-content { display: none; padding: 0 8% 100px 8%; }
-        .active-content { display: block; animation: fadeInUp 0.8s ease; }
-
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
-        .p-card {
-            background: var(--card); padding: 40px; border-radius: 24px;
-            border: 1px solid rgba(255,255,255,0.03); text-align: center; transition: 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        .p-card:hover { transform: translateY(-15px); border-color: var(--primary); box-shadow: 0 30px 60px rgba(0,0,0,0.4); }
-        .p-card img { width: 100%; height: 250px; object-fit: contain; margin-bottom: 25px; transition: 0.5s; }
-        .p-card:hover img { transform: scale(1.1); }
-        
-        .price-tag { font-size: 1.5rem; font-weight: 800; color: var(--primary); margin: 15px 0; }
-        .btn-buy { 
-            width: 100%; padding: 12px; background: none; border: 1px solid var(--primary); 
-            color: var(--primary); font-weight: bold; border-radius: 10px; cursor: pointer; transition: 0.3s;
-        }
-        .btn-buy:hover { background: var(--primary); color: #000; }
-
-        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
-
-        .btn-connect { background: var(--primary); color: #020617; padding: 10px 20px; border-radius: 10px; border: none; font-weight: 800; cursor: pointer; transition: 0.3s; }
-        .btn-connect:hover { transform: scale(1.05); }
-    </style>
-</head>
-<body>
-
-    <nav>
-        <div class="logo">MUSTAFA.PRO</div>
-        <button id="wallet-btn" class="btn-connect" onclick="connectWallet()">Connect Wallet</button>
-    </nav>
-
-    <section class="hero">
-        <div class="hero-content">
-            <span class="badge">Next-Gen Technology</span>
-            <h1>iPhone 15 Pro<br><span>Titanium Power.</span></h1>
-            <p>Forged in titanium and featuring the groundbreaking A17 Pro chip. Buy now with BTC, ETH, or USDT.</p>
-            <div style="display: flex; gap: 15px;">
-                <button onclick="document.getElementById('shop').scrollIntoView()" class="btn-connect" style="padding: 15px 35px;">Shop Now</button>
-            </div>
-        </div>
-        <div class="hero-visual">
-            <img src="iphone.png" class="floating-img" alt="iPhone 15 Pro Hero">
-        </div>
-    </section>
-
-    <div class="tabs-container" id="shop">
-        <button class="tab-btn active" onclick="openSection(event, 'phones')">iPhones</button>
-        <button class="tab-btn" onclick="openSection(event, 'laptops')">MacBooks</button>
+    <div class="item-detail">
+        <p>بەرهەم: iPhone 15 Pro Max</p>
+        <p>بڕی پارە: <strong>1,650,000 IQD</strong></p>
     </div>
 
-    <div id="phones" class="tab-content active-content">
-        <div class="grid">
-            <div class="p-card">
-                <img src="iphone.png" alt="iPhone 15 Pro">
-                <h3>iPhone 15 Pro Max</h3>
-                <p class="price-tag">1,199 USDT</p>
-                <button class="btn-buy">Pay with Crypto</button>
-            </div>
-            </div>
+    <div class="fib-action">
+        <a href="fib://payment?amount=1650000&address=YOUR_FIB_ID" class="btn-fib">
+            کلیک بکە بۆ پارەدان (FIB)
+        </a>
     </div>
+    
+    <p style="font-size: 0.8rem; color: #666; margin-top: 15px;">
+        دوای ناردنی پارەکە، وێنەی پسوڵەکە لێرە دابنێ:
+    </p>
+    <input type="file" id="receipt" class="custom-file-input">
+</div>
 
-    <div id="laptops" class="tab-content">
-        <div class="grid">
-            <div class="p-card">
-                <img src="https://m.media-amazon.com/images/I/71YfM6T1LBL._AC_SL1500_.jpg" alt="MacBook">
-                <h3>MacBook Pro M3</h3>
-                <p class="price-tag">1,599 USDT</p>
-                <button class="btn-buy">Pay with Crypto</button>
-            </div>
-        </div>
-    </div>
-
-    <script>
-        function openSection(evt, sectionName) {
-            var i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-                tabcontent[i].style.display = "none";
-                tabcontent[i].classList.remove("active-content");
-            }
-            tablinks = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tablinks.length; i++) {
-                tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(sectionName).style.display = "block";
-            document.getElementById(sectionName).classList.add("active-content");
-            evt.currentTarget.className += " active";
-        }
-
-        async function connectWallet() {
-            if (window.ethereum) {
-                const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
-                document.getElementById('wallet-btn').innerText = accounts[0].substring(0,6) + "...";
-                document.getElementById('wallet-btn').style.background = "#22c55e";
-            } else {
-                alert("Please open in Trust Wallet");
-            }
-        }
-    </script>
-</body>
-</html>
+<style>
+    .fib-checkout {
+        background: #fff; color: #000;
+        padding: 30px; border-radius: 20px;
+        max-width: 400px; margin: 40px auto;
+        box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        text-align: center; border: 2px solid #f1f1f1;
+    }
+    .fib-header { margin-bottom: 20px; }
+    .item-detail { background: #f8f9fa; padding: 15px; border-radius: 12px; margin-bottom: 25px; }
+    .btn-fib {
+        background: #000; color: #fff;
+        padding: 15px 25px; border-radius: 12px;
+        text-decoration: none; font-weight: bold;
+        display: block; transition: 0.3s;
+    }
+    .btn-fib:hover { background: #333; transform: scale(1.02); }
+    .custom-file-input { margin-top: 10px; font-size: 0.8rem; }
+</style>
